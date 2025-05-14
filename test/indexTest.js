@@ -8,16 +8,18 @@ describe('index.js', function () {
 
     // Data Conversions
     const celsiusTempsToFahrenheit = celsiusTemps.map(temp => ((temp * 9 / 5) + 32));
+    const fahrenheitTempsToCelsius = fahrenheitTemps.map(temp => ((temp - 32) * 5 / 9));
 
-    // Data in one format, full list
+    // Data in full list
     const allTempsInFahrenheit = fahrenheitTemps.concat(celsiusTempsToFahrenheit)
+    const allTempsInCelsius = celsiusTemps.concat(fahrenheitTempsToCelsius)
 
     // Calculate the total temperatures
     const temperature_in_fahrenheit = allTempsInFahrenheit.reduce((sum, temp) => sum + temp, 0);
-    const temperature_in_celsius = (temperature_in_fahrenheit -32) * 5 / 9;
+    const temperature_in_celsius = allTempsInCelsius.reduce((sum, temp) => sum + temp, 0);
     
     // Calculate mean of temperatures
-    const meanCelsius = temperature_in_celsius / allTempsInFahrenheit.length;
+    const meanCelsius = temperature_in_celsius / allTempsInCelsius.length;
     const meanFahrenheit = temperature_in_fahrenheit / allTempsInFahrenheit.length;
 
     describe('tot_temperature_in_fahrenheit', function () {
